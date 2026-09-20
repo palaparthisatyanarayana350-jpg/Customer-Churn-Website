@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ChurnGuard | Customer Churn Prediction</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Churn<span>Guard</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#prediction">Prediction</a>
+            <a href="#insights">Insights</a>
+            <a href="#about">About</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <p class="tag">AI-POWERED CUSTOMER ANALYTICS</p>
+
+            <h1>
+                Predict Customer Churn
+                <br>
+                Before It Happens.
+            </h1>
+
+            <p class="hero-text">
+                An intelligent customer churn prediction system
+                designed to identify customers who are likely to leave
+                and understand the factors behind the prediction.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#prediction" class="primary-btn">
+                    Predict Churn
+                </a>
+
+                <a href="#insights" class="secondary-btn">
+                    View Insights
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="hero-card">
+
+            <div class="card-header">
+                <span>Prediction Overview</span>
+                <span class="status">● LIVE</span>
+            </div>
+
+            <div class="prediction-score">
+
+                <p>Churn Probability</p>
+
+                <h2>26.5%</h2>
+
+                <div class="progress">
+                    <div class="progress-fill"></div>
+                </div>
+
+                <span class="risk-label">Dataset Churn Rate</span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Prediction Section -->
+    <section class="prediction-section" id="prediction">
+
+        <div class="section-heading">
+
+            <p class="tag">CUSTOMER ANALYSIS</p>
+
+            <h2>Predict Customer Churn</h2>
+
+            <p>
+                Enter the customer's details to estimate their
+                likelihood of leaving the service.
+            </p>
+
+        </div>
+
+
+        <div class="prediction-container">
+
+            <form id="predictionForm">
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>Tenure (Months)</label>
+
+                        <input
+                            type="number"
+                            id="tenure"
+                            placeholder="e.g. 12"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Monthly Charges</label>
+
+                        <input
+                            type="number"
+                            id="monthlyCharges"
+                            placeholder="e.g. 70"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Contract</label>
+
+                        <select id="contract">
+
+                            <option value="Month-to-month">
+                                Month-to-month
+                            </option>
+
+                            <option value="One year">
+                                One year
+                            </option>
+
+                            <option value="Two year">
+                                Two year
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Internet Service</label>
+
+                        <select id="internet">
+
+                            <option value="Fiber optic">
+                                Fiber optic
+                            </option>
+
+                            <option value="DSL">
+                                DSL
+                            </option>
+
+                            <option value="No">
+                                No internet service
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Payment Method</label>
+
+                        <select id="payment">
+
+                            <option value="Electronic check">
+                                Electronic check
+                            </option>
+
+                            <option value="Bank transfer (automatic)">
+                                Bank transfer
+                            </option>
+
+                            <option value="Credit card (automatic)">
+                                Credit card
+                            </option>
+
+                            <option value="Mailed check">
+                                Mailed check
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Tech Support</label>
+
+                        <select id="support">
+
+                            <option value="No">
+                                No
+                            </option>
+
+                            <option value="Yes">
+                                Yes
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <button type="submit" class="predict-btn">
+                    Analyze Customer
+                </button>
+
+            </form>
+
+
+            <!-- Result -->
+            <div class="result-card" id="resultCard">
+
+                <div class="result-header">
+
+                    <span class="result-label">
+                        PREDICTION RESULT
+                    </span>
+
+                    <span class="risk-badge" id="riskBadge">
+                        ANALYZING
+                    </span>
+
+                </div>
+
+
+                <h2 id="resultText">
+                    Prediction Result
+                </h2>
+
+
+                <div class="probability-box">
+
+                    <span>
+                        Churn Probability
+                    </span>
+
+                    <strong id="probability">
+                        --%
+                    </strong>
+
+                </div>
+
+
+                <div class="risk-meter">
+
+                    <div class="risk-meter-bar">
+
+                        <div
+                            class="risk-meter-fill"
+                            id="riskMeterFill">
+                        </div>
+
+                    </div>
+
+
+                    <div class="risk-meter-labels">
+
+                        <span>Low</span>
+                        <span>Medium</span>
+                        <span>High</span>
+
+                    </div>
+
+                </div>
+
+
+                <p id="resultDescription">
+                    Enter customer details and analyze the customer
+                    to see the prediction.
+                </p>
+
+
+                <div class="reasons" id="reasons">
+
+                    <h3>
+                        Model Explainability — What-If Analysis
+                    </h3>
+
+                    <ul id="reasonList">
+
+                        <li>
+                            What-if analysis will appear after prediction.
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Insights -->
+    <section class="insights-section" id="insights">
+
+        <div class="section-heading">
+
+            <p class="tag">DATASET INSIGHTS</p>
+
+            <h2>What Our Analysis Found</h2>
+
+            <p>
+                Key observations from the Telco Customer Churn dataset.
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>26.5%</h3>
+
+                <p>
+                    Overall Churn Rate
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>42.7%</h3>
+
+                <p>
+                    Month-to-Month Churn
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>17.98</h3>
+
+                <p>
+                    Average Tenure of Churned Customers
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>45.3%</h3>
+
+                <p>
+                    Electronic Check Churn
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="insight-box">
+
+            <h3>
+                Key Observations
+            </h3>
+
+            <ul>
+
+                <li>
+                    Month-to-month customers showed a higher observed
+                    churn rate than customers with longer contracts.
+                </li>
+
+                <li>
+                    Churned customers had a lower average tenure.
+                </li>
+
+                <li>
+                    Churned customers had higher average monthly charges.
+                </li>
+
+                <li>
+                    Electronic check customers showed the highest
+                    observed churn rate among payment methods.
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- Explainability -->
+        <div class="insight-box explainability-box">
+
+            <div class="explainability-header">
+
+                <div>
+
+                    <p class="tag">
+                        MODEL EXPLAINABILITY
+                    </p>
+
+                    <h3>
+                        What Influences Churn Predictions?
+                    </h3>
+
+                    <p>
+                        Permutation importance from the TabPFN evaluation
+                        shows how strongly each feature contributed to
+                        predictive performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="importance-list">
+
+
+                <!-- Contract -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Contract
+                        </span>
+
+                        <strong>
+                            0.0932
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 100%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tenure -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Tenure
+                        </span>
+
+                        <strong>
+                            0.0761
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 81.65%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Internet Service -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Internet Service
+                        </span>
+
+                        <strong>
+                            0.0274
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 29.40%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Tech Support -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Tech Support
+                        </span>
+
+                        <strong>
+                            0.0130
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 13.95%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Monthly Charges -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Monthly Charges
+                        </span>
+
+                        <strong>
+                            0.0108
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 11.59%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Payment Method -->
+                <div class="importance-item">
+
+                    <div class="importance-label">
+
+                        <span>
+                            Payment Method
+                        </span>
+
+                        <strong>
+                            0.0045
+                        </strong>
+
+                    </div>
+
+                    <div class="importance-bar">
+
+                        <div
+                            class="importance-fill"
+                            style="width: 4.83%;">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <p class="explainability-note">
+
+                Higher permutation importance indicates a larger change
+                in model performance when that feature is shuffled.
+                This shows predictive importance, not a causal relationship.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- About -->
+    <section class="about-section" id="about">
+
+        <p class="tag">
+            ABOUT THE PROJECT
+        </p>
+
+        <h2>
+            Customer Churn Prediction
+        </h2>
+
+        <p>
+            This project focuses on predicting customer churn using
+            machine learning and providing explainability for the
+            resulting predictions.
+        </p>
+
+
+        <div class="tech-stack">
+
+            <span>Python</span>
+            <span>TabPFN</span>
+            <span>Machine Learning</span>
+            <span>Explainability</span>
+            <span>Data Analytics</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <p>
+            Customer Churn Prediction Project
+        </p>
+
+        <p>
+            Built for ML Lab
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
