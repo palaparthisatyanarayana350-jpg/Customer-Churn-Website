@@ -122,13 +122,13 @@ form.addEventListener("submit", async function (event) {
 
 
     // ====================================
-    // SEND REQUEST TO FLASK
+    // SEND REQUEST TO LIVE RENDER BACKEND
     // ====================================
 
     try {
 
         const response = await fetch(
-            "http://127.0.0.1:5000/predict",
+            "https://churnguard-backend-hw0j.onrender.com/predict",
             {
                 method: "POST",
 
@@ -333,11 +333,11 @@ form.addEventListener("submit", async function (event) {
 
 
         resultDescription.textContent =
-            "Unable to connect to the TabPFN prediction server. Please make sure the Flask backend is running.";
+            "Unable to connect to the TabPFN prediction server. Please try again in a moment.";
 
 
         reasonList.innerHTML =
-            "<li>Check that the backend is running on port 5000.</li>";
+            "<li>Make sure the ChurnGuard backend is online and try again.</li>";
     }
 
 
