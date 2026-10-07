@@ -1,34 +1,85 @@
 # ChurnGuard – Customer Churn Prediction
 
-ChurnGuard is a web-based customer churn prediction system that uses **TabPFN** to estimate the probability of customer churn from selected customer attributes.
+ChurnGuard is a machine learning-based web application that predicts the probability of customer churn using the TabPFN classification model.
 
-The project combines machine learning, explainability, and a simple web interface to provide an easy-to-use churn prediction experience.
+The project uses the IBM Telco Customer Churn dataset and provides an interactive interface where users can enter customer information and receive a churn probability and risk category.
+
+---
 
 ## Project Overview
 
-Customer churn prediction helps organizations identify customers who may be likely to leave a service. ChurnGuard provides a prediction interface where users can enter customer information and receive:
+Customer churn is an important problem for businesses because losing existing customers can affect revenue and long-term growth.
 
-- Churn probability
-- Low, Medium, or High churn risk
-- What-if sensitivity analysis
-- Feature-based insights
+ChurnGuard aims to provide a simple prediction system that:
 
-The system uses the **IBM Telco Customer Churn dataset** for model development.
+- Predicts the probability of customer churn
+- Classifies customers into Low, Medium, or High Churn Risk
+- Provides what-if sensitivity analysis
+- Presents important model insights through a web interface
+
+---
 
 ## Objectives
 
 - Develop a customer churn prediction system using TabPFN.
-- Identify important factors associated with churn prediction.
+- Identify customer attributes associated with churn prediction.
 - Provide probability-based churn risk classification.
-- Add explainability through what-if analysis.
-- Build a user-friendly web application.
-- Deploy the machine learning backend and frontend online.
+- Build an easy-to-use web interface for prediction.
+- Provide sensitivity analysis for selected customer attributes.
+- Evaluate the performance of the developed model.
+
+---
+
+## Dataset
+
+The project uses the **IBM Telco Customer Churn Dataset**.
+
+### Dataset Details
+
+- Total records: 7,043
+- Total original features: 20
+- Target variable: `Churn`
+- Churn classes:
+  - No
+  - Yes
+
+The original dataset contains customer demographic, service, contract, payment, and billing information.
+
+For the deployed prediction system, six features are used:
+
+- Tenure
+- Monthly Charges
+- Contract
+- Internet Service
+- Payment Method
+- Tech Support
+
+---
+
+## Data Preprocessing
+
+The following preprocessing steps were performed:
+
+- Converted `TotalCharges` from text to numeric format.
+- Identified 11 missing `TotalCharges` values.
+- Replaced these missing values with 0 because they corresponded to customers with zero tenure.
+- Checked for duplicate records.
+- Verified customer ID uniqueness.
+- Converted the target variable:
+  - `No → 0`
+  - `Yes → 1`
+
+---
 
 ## Machine Learning Model
 
-The project uses **TabPFN (Tabular Prior-Data Fitted Networks)** for tabular classification.
+### TabPFN
 
-The final prediction model uses six features:
+The project uses **TabPFN (Tabular Prior-Data Fitted Network)** for binary classification.
+
+TabPFN is designed for tabular machine learning problems and can perform classification without requiring a traditional long training process for every new dataset.
+
+The final deployment model uses:
 
 1. Tenure
 2. Monthly Charges
@@ -37,56 +88,42 @@ The final prediction model uses six features:
 5. Payment Method
 6. Tech Support
 
-The model predicts whether a customer is likely to churn and produces a churn probability.
-
-## Dataset
-
-The project uses the **IBM Telco Customer Churn dataset**.
-
-Dataset characteristics:
-
-- 7,043 customer records
-- 21 original columns
-- Target variable: `Churn`
-- Churn = Yes / No
-
-### Preprocessing
-
-The dataset was processed before model development:
-
-- `TotalCharges` was converted from text to numeric format.
-- Missing `TotalCharges` values were handled.
-- Customer ID was excluded from modeling.
-- The final model uses six selected features.
-- Categorical features are handled by the TabPFN client.
+---
 
 ## Model Evaluation
 
-The model was evaluated using a stratified 80/20 train-test split with `random_state = 42`.
+The model was evaluated using an 80/20 stratified train-test split with a fixed random state of 42.
+
+### Performance
 
 | Metric | Score |
 |---|---:|
 | Accuracy | 80.34% |
 | Precision | 66.22% |
 | Recall | 52.94% |
-| F1 Score | 58.84% |
+| F1-Score | 58.84% |
 | ROC-AUC | 84.63% |
 
-The evaluation results are based on the holdout test set.
+### Confusion Matrix
 
-## Explainability
+| | Predicted No Churn | Predicted Churn |
+|---|---:|---:|
+| Actual No Churn | 934 | 101 |
+| Actual Churn | 176 | 198 |
 
-ChurnGuard includes a what-if sensitivity analysis.
+The ROC-AUC score indicates good ability of the model to distinguish between churn and non-churn customers.
 
-For selected categorical features, the system changes the feature value while keeping the other customer inputs unchanged and obtains the resulting churn probability.
+---
 
-This allows users to compare how different possible customer profiles affect the model's prediction.
+## Explainability and Sensitivity Analysis
 
-### Global Feature Importance
+ChurnGuard provides a what-if sensitivity analysis.
 
-Permutation importance was used to estimate the relative importance of the six selected features.
+The system changes one selected feature at a time while keeping the other customer attributes unchanged and observes the resulting change in predicted churn probability.
 
-| Feature | Permutation Importance |
+The evaluated feature importance using permutation importance was:
+
+| Feature | Importance |
 |---|---:|
 | Contract | 0.0932 |
 | Tenure | 0.0761 |
@@ -97,59 +134,70 @@ Permutation importance was used to estimate the relative importance of the six s
 
 These values represent model-based feature importance and should not be interpreted as causal effects.
 
+---
+
 ## Web Application
 
-The project provides a single-page web application with the following sections:
+ChurnGuard provides a single-page web interface containing:
 
-- Home
-- Customer Prediction
-- Prediction Result
-- What-if Analysis
-- Dataset Insights
-- Explainability
-- About
+- Home section
+- Customer prediction form
+- Churn probability
+- Risk classification
+- Risk meter
+- What-if sensitivity analysis
+- Dataset insights
+- Model information
+- Project information
 
-The prediction interface accepts customer information and communicates with the deployed TabPFN backend through an API.
+### Risk Classification
 
-## Technologies Used
+| Churn Probability | Risk Level |
+|---|---|
+| Below 35% | Low Risk |
+| 35% – 59.99% | Medium Risk |
+| 60% and above | High Risk |
+
+---
+
+## Technology Stack
 
 ### Machine Learning
-
 - Python
 - Pandas
 - Scikit-learn
 - TabPFN
 
 ### Backend
-
 - Flask
 - Flask-CORS
-- Gunicorn
+- Python
 
 ### Frontend
-
 - HTML
 - CSS
 - JavaScript
 
 ### Deployment and Version Control
-
 - Git
 - GitHub
 - Render
+
+---
 
 ## Project Structure
 
 ```text
 Customer-Churn-Website/
 │
-├── index.html
-├── script.js
-├── style.css
+├── backend/
+│   ├── app.py
+│   ├── evaluate_model.py
+│   ├── explainability.py
+│   ├── requirements.txt
+│   └── WA_Fn-UseC_-Telco-Customer-Churn.csv
 │
-└── backend/
-    ├── app.py
-    ├── evaluate_model.py
-    ├── explainability.py
-    ├── requirements.txt
-    └── WA_Fn-UseC_-Telco-Customer-Churn.csv
+├── index.html
+├── style.css
+├── script.js
+└── README.md
