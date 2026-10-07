@@ -201,27 +201,6 @@ Customer-Churn-Website/
 ├── style.css
 ├── script.js
 └── README.md
-User enters customer details
-            ↓
-Frontend sends data to Flask backend
-            ↓
-Customer data is converted into model input
-            ↓
-TabPFN predicts churn probability
-            ↓
-Probability is converted into risk category
-            ↓
-What-if sensitivity analysis is generated
-            ↓
-Result displayed on the website
-
-
-### After pasting
-
-In GitHub:
-
-**Commit changes → Commit directly to `main` → Commit changes**
-
 Then tell me **“README done.”**
 
 After that we'll move to **Step 2: GitHub collaborator + repository final check**.
