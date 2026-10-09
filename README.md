@@ -201,6 +201,3 @@ Customer-Churn-Website/
 ├── style.css
 ├── script.js
 └── README.md
-Then tell me **“README done.”**
-
-After that we'll move to **Step 2: GitHub collaborator + repository final check**.
